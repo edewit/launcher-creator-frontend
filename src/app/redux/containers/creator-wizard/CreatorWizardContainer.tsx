@@ -17,6 +17,7 @@ import SmartWizard, { Step } from '../../../../shared/components/smart-wizard/Sm
 import { getLaunchState } from '../../reducers/launchReducer';
 import { smartWizardActions } from '../../../../shared/components/smart-wizard/smartWizardActions';
 import { launchActions } from '../../actions/launchActions';
+import SwitchStepContainer from './steps/SwitchStepContainer';
 
 
 const wizardStepsDefinition = {
@@ -27,6 +28,10 @@ const wizardStepsDefinition = {
   runtimeStep: {
     id: 'runtimeStep',
     component: RuntimeStepContainer,
+  },
+  switchStep: {
+    id: 'switchStep',
+    component: SwitchStepContainer
   },
   capabilityStep: {
     id: 'capabilityStep',
@@ -66,6 +71,7 @@ function buildProjectile(stepState: Step[]): Projectile {
   return {
     name: _.get(byId[wizardStepsDefinition.nameStep.id], 'context.name'),
     runtime: _.get(byId[wizardStepsDefinition.runtimeStep.id], 'context.runtime.id'),
+    choice: _.get(byId[wizardStepsDefinition.switchStep.id], 'context.choice'),
     capabilities: Array.from(_.get(byId[wizardStepsDefinition.capabilityStep.id], 'context.capabilities', [])),
     clusterId: _.get(byId[wizardStepsDefinition.deploymentStep.id], 'context.cluster.id'),
     projectName: _.get(byId[wizardStepsDefinition.nameStep.id], 'context.name'),
